@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietSach";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style type="text/css">
+    .addtocart, .giaban, .ngaycapnhat {
+        padding-left: 450px;        
+    }
+    .motasach {
+        padding-top: 30px;
+    }
+    p > span {
+        font-size: 20px;
+        color: blue;
+        #808080
+    }
+    .aa {
+        height: 40px;
+        background-image: linear-gradient(blue,white);
+        margin-bottom : 40px;
+    }
+    .bb {
+        width: 300px;
+        height: 300px;
+        box-shadow: 10px 10px 5px 5px #808080;
+    }
+    .tensach{
+        padding-top:3px;
+    }
+</style>
+<div class="thumbnail">
+    <div class="aa">
+    <p class="tensach">
+        <h4 style="color:red; text-align:center;">@Model.TenSach</h4>
+    </p>
+    </div>
+    <img class="bb" src="~/Images/@Model.AnhBia" alt="@Model.TenSach" />
+    <div class="motasach">
+        <p>
+            @Html.Raw(Model.MoTa.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+        </p>
+    </div>
+    <p class="ngaycapnhat" >Ngày Cập Nhật:@Html.FormatValue(@Model.NgayCapNhat, "{0:dd/MM/yyyy}")</p>
+    <p class="giaban" >Giá Bán:<span>@Html.FormatValue(@Model.GiaBan, "{0:#,##0}")VNĐ</span></p>
+    <p class="addtocart">
+        <a href="@Url.Action("ThemGioHang", "GioHang", new { ms = Model.MaSach, url = Request.Url.ToString()})" new {id= @Model.MaSach} " 
+           class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">Add To Cart</span>
+        </a>
+    </p>
+</div>

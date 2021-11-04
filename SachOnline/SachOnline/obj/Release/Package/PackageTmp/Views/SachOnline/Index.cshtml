@@ -1,0 +1,64 @@
+﻿@*@model IEnumerable<SachOnline.Models.SACH>*@
+@model IEnumerable<SachOnline.Models.SACH>
+@{
+    ViewBag.Title = "TRANG CHỦ";
+    //Layout = "~/View/Shared/_LayoutUser.cshtml";
+
+}
+@using SachOnline.Models;
+
+<h2 class="text-center">SÁCH MỚI</h2>
+<hr>
+
+<div class="row text-center">
+    @{ int i = 0;}
+    @foreach (var sach in Model)
+    {
+        i++;
+        if (i % 3 == 0)
+        {
+            @:<div class="col-sm-4 col-md-4 col-lg-4 col-xs-6 hidden-xs">
+
+
+
+
+            }
+            else
+            {
+                @:<div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+                }
+                <div class="thumbnail">
+                    <img src="~/Images/@sach.AnhBia" alt="Thumbnail Image 1" class="img-responsive img-rounded imgbook " style="width:400px;">
+                    <div class="media-body">
+                        <h4 style=" min-height:80px;">
+                            <a href="@Url.Action("ChiTietSach","SachOnline", new { id =sach.MaSach})">@sach.TenSach</a>
+                        </h4>
+                        <p>
+                            <a href="@Url.Action("ThemGioHang", "GioHang", new { ms = sach.MaSach, url = Request.Url.ToString()})" class="btn btn-primary" role="button">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            @:</div>
+
+
+
+
+        }
+    </div>
+</div>
+<nav class="text-center">
+    <!-- Add class .pagination-lg for larger blocks or .pagination-sm for smaller blocks-->
+    <ul class="pagination">
+        <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li class="disabled"><a href="#">5</a></li>
+        <li> <a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
+    </ul>
+</nav>
+

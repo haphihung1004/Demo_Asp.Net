@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SachOnline.Models.ReportInfo>
+@{
+    ViewBag.Title = "ThongKe";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>THỐNG KÊ SỐ ĐẦU SÁCH THEO CHỦ ĐỀ</h2>
+<table border="1">
+    <tr style="background-color:burlywood;font-weight:bold ">
+        <td>Mã CD</td>
+        <td>Tên CD</td>
+        <td>Số Đầu Sách</td>
+        <td>Tổng Số Sách</td>
+    </tr>
+    @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Count</td>
+                    <td>@item.Sum</td>
+                </tr>
+            }
+</table>
+

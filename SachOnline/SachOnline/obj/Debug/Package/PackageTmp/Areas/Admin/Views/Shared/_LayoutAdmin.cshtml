@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+
+    @Scripts.Render("~/Scripts/js")
+    @Styles.Render("~/Content/css")
+    <script src="~/tinymce/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: 'textarea' });</script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <!--navbar-fixed-top-->
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navAdmin" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")">SachOnlineAdmin</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navAdmin">
+                <ul class="nav navbar-nav">
+                    <li><a class="@Url.Action("Index","Sach")">Quản Lý Sách</a></li>
+                    <li><a class="@Url.Action("Index","ChuDe")">Quản Lý Chủ Đề</a></li>
+                    <li><a class="@Url.Action("Index","NhaXuatBan")">Quản Lý Nhà Xuất Bản</a></li>
+                    <li><a class="@Url.Action("Index","KhachHang")">Quản Lý Khách Hàng</a></li>
+                    <li><a class="@Url.Action("Index","DonHang")">Quản Lý Đơn Hàng</a></li>
+                 </ul>
+             </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-->
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <footer class="container well">
+        <div style="text-align:center;">
+            <p>ADMIN</p>
+        </div>
+    </footer>
+</body>
+</html>

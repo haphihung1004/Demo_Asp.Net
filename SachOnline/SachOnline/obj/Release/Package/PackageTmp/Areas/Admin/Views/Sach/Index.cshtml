@@ -1,0 +1,107 @@
+﻿@*Khai báo để sử dụng chức năng phân trang*@
+@using SachOnline.Models
+@using PagedList.Mvc;
+@model  PagedList.PagedList<SachOnline.Models.SACH>
+@*Xây dựng một helper tùy chỉnh để cắt độ dài chuỗi*@
+@helper Truncate(string s, int length)
+{
+    if (s.Length < length)
+    {
+        @s
+    }
+    else
+    {
+        @s.Substring(0, length)<text>...</text>
+    }
+}
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center">QUẢN LÍ THÔNG TIN SÁCH</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", "sach")
+</p>
+<table class="table">
+    <tr>
+        <th style="text-align:center;width:140px">
+            Tên sách
+        </th>
+        <th style="text-align:center;width:200px">
+            Mô tả
+        </th>
+        <th style="text-align:center;width:80px">
+            @Html.DisplayNameFor(model => model.First().AnhBia)
+        </th>
+        <th style="text-align:center;width:100px">
+            Ngày cập nhật
+        </th>
+        <th style="text-align:center;width:80px">
+            Số lượng
+        </th>
+        <th style="text-align:center;width:80px">
+            @Html.DisplayNameFor(model => model.First().GiaBan)
+        </th>
+        <th style="text-align:center;width:100px">
+            Chủ đề
+        </th>
+        <th style="text-align:center;width:100px">
+            Nhà sản xuất
+        </th>
+        <th style="text-align:center"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*Sử dụng helper để cắt TenSach lấy 50 kí tự*@
+                @Truncate(item.TenSach, 50)
+            </td>
+            <td>
+                @*Sử dụng helper để cắt MoTa lấy 70 kí tự*@
+                @Html.Raw(Truncate(item.MoTa, 70).ToString())
+            </td>
+            <td>
+                <img src="~/Images/@item.AnhBia" style="width:50px;" />
+            </td>
+            <td>
+                @*Định dạng hiển thị*@
+                @Html.FormatValue(@item.NgayCapNhat, "{0:dd/MM/yyyy}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongBan)
+            </td>
+            <td>
+                @Html.FormatValue(item.GiaBan, "{0:#,##0}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CHUDE.TenChuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NHAXUATBAN.TenNXB)
+            </td>
+            <td>
+                <a href=" @Url.Action("Edit", "sach", new { id =item.MaSach })" class="btn btn-warning" role="button">Sửa</a>
+                <a href=" @Url.Action("Details", "sach", new { id = item.MaSach })" class="btn btn-warning" role="button">Chi tiết</a>
+                <a href=" @Url.Action("Delete", "sach", new { id = item.MaSach })" class="btn btn-warning" role="button">Xóa</a>
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+@*Tạo liên kết phần trang*@
+Trang @(Model.PageCount< Model.PageNumber ?0:Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+</style>

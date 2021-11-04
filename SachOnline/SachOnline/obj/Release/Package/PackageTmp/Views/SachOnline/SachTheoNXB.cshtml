@@ -1,0 +1,43 @@
+﻿@using SachOnline.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SACH>
+@{
+    ViewBag.Title = "SachTheoNXB";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<h2 class="text-center">SÁCH THEO NHÀ XUẤT BẢN</h2>
+<hr>
+<div class="row text-center">
+    @foreach (var sach in Model)
+    {
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+            <div class="thumbnail">
+                <img src="~/Images/@sach.AnhBia" alt="Thumbnail Image 1" class="img-responsive img-rounded imgbook " style="width:400px;">
+                <div class="media-body">
+                    <h4 style=" min-height:70px;">
+                        <a href="@Url.Action("ChiTietSach","SachOnline",new {id = sach.MaSach })">@sach.TenSach</a>
+                    </h4>
+                    <p>
+                        <a href="@Url.Action("ThemGioHang", "GioHang", new { ms = sach.MaSach, url = Request.Url.ToString()})" class="btn btn-primary" role="button">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@*Tạo liên kết chân trang*@
+    Trang@(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("SachTheoNXB", new { iMaNXB = ViewBag.MaNXB, page = page }))
+    </div>
+    <style>
+        .MenuTrang {
+            display: inline;
+            text-align: center;
+        }
+    </style>

@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/Admin/css")
+</head>
+<body>
+    <form action="~/Home/Login" method="post" class="box login">
+        <fieldset class="boxBody">
+            <h4 style="text-align:center;font-weight:bold">LOGIN ADMIN</h4>
+            <label>Usename</label>
+            <input type="text" tabindex="1" name="UserName" placeholder="Type your username" required>
+            <label><a href="#" class="rlink" tabindex="5">Foreget your passworks?</a>Passwork</label>
+            <input type="password" tabindex="2" name="Password" placeholder="Type your password" required>
+            <p style="font-style:italic; color:red; margin:0px;">@ViewBag.ThongBao</p>
+        </fieldset>
+        <footer>
+            <label><input type="checkbox"tabindex="3">Keep me logged in</label>
+            <input type="submit" class="btnLogin" value="Login" tabindex="4">
+        </footer>
+    </form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<SachOnline.Models.NHAXUATBAN>
+
+
+<li class="dropdown">
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">SÁCH THEO NHÀ XUẤT BẢN<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+        @foreach (var nxb in Model)
+        {
+            <li>
+                @Html.ActionLink(nxb.TenNXB, "SachTheoNXB", new { id = nxb.MaNXB }, "SachOnline")
+            </li>
+            <li role="separator" class="divider"></li>
+        }
+    </ul>
+</li>
+
+
+

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SachOnline.Models.NHAXUATBAN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Danh Sách Nhà Xuất Bản</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Add", "NhaXuatBan")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenNXB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNXB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DienThoai)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit",new {id = item.MaNXB})">Sửa</a> |
+                <a href="/NhaXuatBan/Details?id=@item.MaNXB">Chi tiết</a> |
+                @Html.ActionLink("Xóa", "XoaNXB", new { id = item.MaNXB })
+            </td>
+        </tr>
+    }
+
+</table>
